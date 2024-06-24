@@ -26,8 +26,10 @@ final class DataModel: ObservableObject {
     }
     
     func handleCameraPreviews() async {
+		let context = CIContext(options: [.cacheIntermediates: false,
+										  .name: "handleCameraPreviews"])
         let imageStream = camera.previewStream
-            .map { $0.image }
+			.map { $0.image(ciContext: context) }
 
         for await image in imageStream {
             Task { @MainActor in
@@ -116,8 +118,7 @@ fileprivate struct PhotoData {
 }
 
 fileprivate extension CIImage {
-    var image: Image? {
-        let ciContext = CIContext()
+	func image(ciContext: CIContext) -> Image? {
         guard let cgImage = ciContext.createCGImage(self, from: self.extent) else { return nil }
         return Image(decorative: cgImage, scale: 1, orientation: .up)
     }

@@ -137,6 +137,12 @@ class Camera: NSObject {
 
         let videoOutput = AVCaptureVideoDataOutput()
         videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "VideoDataOutputQueue"))
+		
+		videoOutput.videoSettings = [
+			String(kCVPixelBufferPixelFormatTypeKey) : Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
+		]
+		
+		videoOutput.alwaysDiscardsLateVideoFrames = true
   
         guard captureSession.canAddInput(deviceInput) else {
             logger.error("Unable to add device input to capture session.")
