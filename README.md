@@ -16,7 +16,7 @@ The sample code is fairly straightforward, but I did find some room for improvem
 Apple Sample Code Architecture
 -----------
 
-![3 main objects: Camera, Data Model, Viewfinder View](images-for-readme/orig-arch.png]
+![3 main objects: Camera, Data Model, Viewfinder View](images-for-readme/orig-arch.png)
 
 # Architecture for Apple's Sample Code for Previewing the Camera Output
 
@@ -33,7 +33,7 @@ Performance
 
 I worried when I saw this code that it might not be performant enough to use in shipping code. I did some quick tests using an iPhone SE — not the most powerful of Apple's current lineup! — and found that it didn't break a sweat. The performance of this sample code was almost as good as the "AVCam" camera sample code which uses the `UIViewRepresentable` technique. The "Energy Impact" meter in the pure SwiftUI code was quite comfortable in the "low" zone. The `UIViewRepresentable` code's energy impact was often "none," so if you are trying to squeeze out *every last bit of battery life** from your code, especially if you already have working code, you can skip the rest of this article and stick with your legacy code. (In my current project, I was creating a `CIImage` for each frame anyhow, in order to run through some `CoreML` and `Vision` processing, so it was worth it for me to change and simplify my codebase.)
 
-![meter showing low energy impact](images-for-readme/low-energy.png]
+![meter showing low energy impact](images-for-readme/low-energy.png)
 
 Room for Improvement
 --------------------
@@ -52,7 +52,7 @@ I found several opportunities to tighten up the sample code. If you wish to use 
 New Architecture
 ----------------
 
-![3 main objects: Camera, Content View, Viewfinder View](images-for-readme/new-arch.png]
+![3 main objects: Camera, Content View, Viewfinder View](images-for-readme/new-arch.png)
 
 Possible new architecture for previewing the camera with a SwiftUI view
 
