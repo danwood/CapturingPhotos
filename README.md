@@ -3,6 +3,9 @@
 > [!NOTE]
 > Based on [this Apple Sample Code](https://developer.apple.com/tutorials/sample-apps/capturingphotos-camerapreview). This README is based on article originally published at [https://www.linkedin.com/pulse/writing-iphone-camera-app-swiftui-dan-wood-xru4c](https://www.linkedin.com/pulse/writing-iphone-camera-app-swiftui-dan-wood-xru4c).
 
+> [!WARNING]
+> To be able to run this swift package under Xcode 26, be sure that this source folder ends with ".swiftpm" extension. Otherwise you will get the error "iOS app products are only permitted in Swift Playground packages".
+
 Over the last several years, I've worked on several iPhone projects that make use of the built-in camera. Developers who have written similar apps have probably started with some Apple sample code, such as [AVCam: Building a camera app](https://developer.apple.com/documentation/avfoundation/capture_setup/avcam_building_a_camera_app?trk=article-ssr-frontend-pulse_little-text-block).
 
 This sample code has been updated through the years as new frameworks became available. The version currently online, updated just after WWDC24, ostensibly requires iOS 18 (beta) to run, though I have found that it will also deploy to iOS 17 with only a minor change to project settings.
