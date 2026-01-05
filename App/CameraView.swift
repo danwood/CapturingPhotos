@@ -5,11 +5,16 @@ See the License.txt file for this sample’s licensing information.
 import SwiftUI
 
 struct CameraView: View {
-    @StateObject private var model = DataModel()
- 
-    private static let barHeightFactor = 0.15
-    
-    
+	private let camera: Camera
+	@StateObject private var model: DataModel
+	private static let barHeightFactor = 0.15
+	
+	init() {
+		let camera = Camera()
+		self.camera = camera
+		_model = StateObject(wrappedValue: DataModel(camera: camera))
+	}
+
     var body: some View {
         
         NavigationStack {
@@ -35,7 +40,7 @@ struct CameraView: View {
                     .background(.black)
             }
             .task {
-                await model.camera.start()
+                await camera.start()
                 await model.loadPhotos()
                 await model.loadThumbnail()
             }
@@ -55,10 +60,10 @@ struct CameraView: View {
             NavigationLink {
                 PhotoCollectionView(photoCollection: model.photoCollection)
                     .onAppear {
-                        model.camera.isPreviewPaused = true
+                        camera.isPreviewPaused = true
                     }
                     .onDisappear {
-                        model.camera.isPreviewPaused = false
+                        camera.isPreviewPaused = false
                     }
             } label: {
                 Label {
@@ -69,7 +74,7 @@ struct CameraView: View {
             }
             
             Button {
-                model.camera.takePhoto()
+                camera.takePhoto()
             } label: {
                 Label {
                     Text("Take Photo")
@@ -86,7 +91,7 @@ struct CameraView: View {
             }
             
             Button {
-                model.camera.switchCaptureDevice()
+                camera.switchCaptureDevice()
             } label: {
                 Label("Switch Camera", systemImage: "arrow.triangle.2.circlepath")
                     .font(.system(size: 36, weight: .bold))

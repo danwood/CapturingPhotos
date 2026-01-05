@@ -7,15 +7,16 @@ import SwiftUI
 import os.log
 
 final class DataModel: ObservableObject {
-    let camera = Camera()
     let photoCollection = PhotoCollection(smartAlbum: .smartAlbumUserLibrary)
     
     @Published var viewfinderImage: Image?
     @Published var thumbnailImage: Image?
     
+	let camera: Camera
     var isPhotosLoaded = false
     
-    init() {
+	init(camera: Camera) {
+		self.camera = camera
         Task {
             await handleCameraPreviews()
         }
